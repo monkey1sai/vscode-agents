@@ -10,13 +10,17 @@
     "AI",
     "Chat"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/example/google-l6-agent.git"
+  },
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
     "chatParticipants": [
       {
         "id": "google.l6",
-        "name": "google",
+        "name": "google工程師",
         "description": "Google L6 Senior Engineer Persona",
         "isSticky": true,
         "commands": [

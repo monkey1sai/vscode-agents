@@ -73,17 +73,13 @@ export function activate(context: vscode.ExtensionContext) {
 
     const handler: vscode.ChatRequestHandler = async (request: vscode.ChatRequest, context: vscode.ChatContext, stream: vscode.ChatResponseStream, token: vscode.CancellationToken): Promise<IChatResult> => {
         
-        // Select the model
-        const [model] = await vscode.lm.selectChatModels({ family: 'gpt-4' });
-        if (!model) {
-            stream.markdown('Sorry, I cannot find a suitable model to handle this request.');
-            return { metadata: { command: '' } };
-        }
+        // Use the model selected by the user in Copilot Chat
+        const model = request.model;
 
         // Construct messages
         const messages = [
             vscode.LanguageModelChatMessage.User(GOOGLE_L6_PROMPT),
-            ...request.messages
+            vscode.LanguageModelChatMessage.User(request.prompt)
         ];
 
         // Handle commands if any

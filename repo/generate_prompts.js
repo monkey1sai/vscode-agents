@@ -14,7 +14,10 @@ const nameMapping = {
     "AI產品工程師": "ai_product",
     "領域驅動設計（DDD）工程師": "ddd_engineer",
     "架構滅絕師": "arch_destroyer",
-    "超級codeing助理": "super_coding"
+    "友善AI助手": "friendly_assistant",
+    "創意寫手": "creative_writer",
+    "耐心教育導師": "patient_tutor",
+    "專業數據分析師": "data_analyst"
 };
 
 // Helper to clean filename
@@ -83,5 +86,7 @@ console.log('Generated src/prompts.ts');
 const packageJsonPath = 'package.json';
 const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
 packageJson.contributes.chatParticipants = participants;
+// Keep activation events in sync with chat participants
+packageJson.activationEvents = participants.map(p => `onChatParticipant:${p.id}`);
 fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
 console.log('Updated package.json');
